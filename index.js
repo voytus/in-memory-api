@@ -14,4 +14,16 @@ app.put(`/update`);
 app.delete(`/delete`);
 
 
+
+app.use(morgan(`dev`));
+app.use(`/todo`, ToDoRouter);
+
+app.use(function (error, request, response, next) {
+    response.status(error.statusCode || 500)
+    .send(error.message || "Wrong again, get rid of some code");
+
+
+});
+
+
 app.listen(PORT, () => console.log(`Looks like running`));
